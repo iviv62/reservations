@@ -1,0 +1,55 @@
+.arrow-btn{
+    width: 32px;
+    height:32px;
+    cursor: pointer;
+    padding:8px;
+}
+.arrow-btn:hover path{
+    fill:blueviolet;
+   
+}
+.day{
+    font-size:18px;
+    font-weight: 600;
+    font-family: Roboto,Arial,sans-serif;
+}
+
+.date{
+    font-size:14px;
+    font-family: Roboto,Arial,sans-serif;
+}
+
+.line {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 0.3em;
+    margin-bottom: 1em;
+    padding: 0;
+}
+.dashed{
+    padding: 5px;
+    padding-right:10px ;
+    padding-left:10px ;
+    margin:3px;
+    font-weight: 500;
+    border-radius: 0.3em;
+    background-color: var(--color-blue-gray-200);
+}
+
+.hour-badge{
+    padding: 5px;
+    padding-right:10px ;
+    padding-left:10px ;
+    margin:3px;
+    font-weight: 500;
+    border-radius: 0.3em;
+    background-color: var(--color-blue-gray-200);
+}
+.hour-badge:hover{
+    background-color: var(--color-blue-gray-800);
+    cursor: pointer;
+    color:white;
+    transition-delay: 0.01s;
+}

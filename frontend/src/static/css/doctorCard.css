@@ -1,0 +1,72 @@
+.profile-pic{
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.image-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+}
+.card-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.title {
+    font-size: 20px!important;
+    font-weight: 500;
+    line-height: 1!important;
+    letter-spacing: .02em!important;
+    font-family: Roboto,sans-serif!important;
+}
+.title2{
+    font-size: 16px!important;
+    font-weight: 300;
+    line-height: 1!important;
+    letter-spacing: .02em!important;
+    font-family: Roboto,sans-serif!important;
+}
+.badge-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.header{
+    height:auto;
+    font-size: 25px;
+    padding: 10px;
+    font-weight: 400;
+    background-color:var(--card-header);
+    flex-direction: row;
+    display:flex;
+
+}
+.header-dark{
+    height:auto;
+    font-size: 25px;
+    padding: 10px;
+    font-weight: 400;
+    background-color:var(--color-primary);
+    color:white;
+    flex-direction: row;
+    display:flex;
+    justify-content: center;
+
+}
+.content{
+    padding: 10px;
+}
+
+.footer{
+    height:10%;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px;
+    background-color:var(--card-header);
+    flex-direction: row;
+    display:flex;
+
+}
