@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User,AbstractUser, BaseUserManager
 from multiselectfield import MultiSelectField
 from .choices import *
+from django_better_admin_arrayfield.models.fields import ArrayField
+import datetime
+
 class TimeStampable(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True)
@@ -59,7 +62,6 @@ class Clinic(models.Model):
         return self.name
 
 class Account(AbstractUser):
-    
 	email 					= models.EmailField(verbose_name="email", max_length=60, unique=True)
 	username 				= models.CharField(max_length=30, unique=True)
 	date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
@@ -71,13 +73,13 @@ class Account(AbstractUser):
 	is_superuser			= models.BooleanField(default=False)
 	first_name 				= models.CharField(max_length=50,blank=True)
 	last_name 				= models.CharField(max_length=50,blank=True)
-	phone	                = models.CharField(max_length=50,blank=True)
+	phone					= models.CharField(max_length=50,blank=True)
+	region					= models.CharField(max_length=100,choices=REGIONS,blank=True)
 	insurers                = MultiSelectField(choices=INSURERS,blank=True)
+	badges					= MultiSelectField(choices=BADGES,blank=True,null=True)
+	specialty               = MultiSelectField(choices=SPECIALTY ,blank = True)
 	city                    = models.CharField(max_length=100,blank=True)
 	address                 = models.CharField(max_length=200,blank=True)
-	region                  = models.CharField(max_length=100,choices=REGIONS,blank=True)
-	specialty               = MultiSelectField(choices=SPECIALTY ,blank = True)
-    badges                  = MultiSelectField(choices=BADGES ,blank = True)
 	works_in                = models.ManyToManyField(Clinic ,blank=True)
 	website                 = models.URLField(blank=True)
 	description             = models.TextField(blank=True)
@@ -118,6 +120,5 @@ class Reservation(TimeStampable):
 class TimeSlot(TimeStampable):
     clinic                 = models.ForeignKey(Clinic,on_delete=models.CASCADE,related_name="Clinic")
     doctor                 = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="doc")
-    time_slot              = models.TimeField()
-    
-    
+    day                    = models.CharField(max_length=1, choices=DAYS_OF_WEEK)
+    time_slot              = ArrayField(models.TimeField(default=datetime.now()), blank=True,)

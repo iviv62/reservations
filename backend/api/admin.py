@@ -1,12 +1,13 @@
 from django.contrib import admin
 from .models import Account,Image,Reservation,Clinic,Holiday,TimeSlot
+from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 
 
 class InLineImage(admin.StackedInline):
     model=Image
     
-class InLineTimeSlot(admin.StackedInline):
+class InLineTimeSlot(admin.StackedInline,DynamicArrayMixin):
     model=TimeSlot
 
 
