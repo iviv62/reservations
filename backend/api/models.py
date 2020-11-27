@@ -62,7 +62,6 @@ class Account(AbstractUser):
     
 	email 					= models.EmailField(verbose_name="email", max_length=60, unique=True)
 	username 				= models.CharField(max_length=30, unique=True)
-	image                   = models.ImageField()
 	date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
 	last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
 	is_admin				= models.BooleanField(default=False)
@@ -78,6 +77,7 @@ class Account(AbstractUser):
 	address                 = models.CharField(max_length=200,blank=True)
 	region                  = models.CharField(max_length=100,choices=REGIONS,blank=True)
 	specialty               = MultiSelectField(choices=SPECIALTY ,blank = True)
+    badges                  = MultiSelectField(choices=BADGES ,blank = True)
 	works_in                = models.ManyToManyField(Clinic ,blank=True)
 	website                 = models.URLField(blank=True)
 	description             = models.TextField(blank=True)
