@@ -120,5 +120,5 @@ class Reservation(TimeStampable):
 class TimeSlot(TimeStampable):
     clinic                 = models.ForeignKey(Clinic,on_delete=models.CASCADE,related_name="Clinic")
     doctor                 = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="doc")
-    day                    = models.CharField(max_length=1, choices=DAYS_OF_WEEK)
-    time_slot              = ArrayField(models.TimeField(default=datetime.now()), blank=True,)
+    day                    = models.CharField(max_length=100, choices=DAYS_OF_WEEK)
+    time_slot              = ArrayField(models.TimeField(blank=True,null=True), blank=True,)
