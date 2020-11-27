@@ -2,7 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User,AbstractUser, BaseUserManager
 from multiselectfield import MultiSelectField
 from .choices import *
+class TimeStampable(models.Model):
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        abstract = True
 
 class MyAccountManager(BaseUserManager):
 	def create_user(self, email, username, password=None):
@@ -96,3 +101,23 @@ class Account(AbstractUser):
 class Image(models.Model):
     image = models.ImageField(upload_to='account-images/%Y/%m/%d/', blank=True)
     multiImage = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='images' )
+    
+class Holiday(models.Model):
+    doctor                 = models.ForeignKey(Account,on_delete=models.CASCADE,)
+    date                   = models.DateField()
+    clinic                 = models.ForeignKey(Clinic,on_delete=models.CASCADE,)
+    
+
+class Reservation(TimeStampable):
+    user                   = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="user")
+    doctor                 = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="doctor")
+    clinic                 = models.ForeignKey(Clinic,on_delete=models.CASCADE,related_name="clinic")
+    date                   = models.DateField()
+    time_slot              = models.TimeField()
+    
+class TimeSlot(TimeStampable):
+    clinic                 = models.ForeignKey(Clinic,on_delete=models.CASCADE,related_name="Clinic")
+    doctor                 = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="doc")
+    time_slot              = models.TimeField()
+    
+    
