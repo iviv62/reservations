@@ -52,6 +52,7 @@ class MyAccountManager(BaseUserManager):
 		return user
 
 class Clinic(models.Model):
+    uid 					= models.AutoField(primary_key=True, auto_created=True,blank=True,verbose_name="UID" )
     name                    = models.CharField(max_length=200)
     region                  = models.CharField(max_length=100, choices=REGIONS, default="София")
     city                    = models.CharField(max_length=100,blank=True)
@@ -62,6 +63,7 @@ class Clinic(models.Model):
         return self.name
 
 class Account(AbstractUser):
+	uid 					= models.AutoField(primary_key=True ,auto_created=True,blank=True,verbose_name="UID" )
 	email 					= models.EmailField(verbose_name="email", max_length=60, unique=True)
 	username 				= models.CharField(max_length=30, unique=True)
 	date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
@@ -82,7 +84,7 @@ class Account(AbstractUser):
 	address                 = models.CharField(max_length=200,blank=True)
 	works_in                = models.ManyToManyField(Clinic ,blank=True)
 	website                 = models.URLField(blank=True)
-	description             = models.TextField(blank=True)
+	
     
 	
 
@@ -101,9 +103,17 @@ class Account(AbstractUser):
 		return True
 
 class Image(models.Model):
-    image = models.ImageField(upload_to='account-images/%Y/%m/%d/', blank=True)
+    image      = models.ImageField(upload_to='account-images/%Y/%m/%d/', blank=True)
+    #alt_text   = models.CharField(max_length=75) 
     multiImage = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='images' )
     
+class AccountInfoField(models.Model):
+ 	user = models.ForeignKey(Account, on_delete=models.CASCADE )
+ 	title = models.CharField(max_length=100,blank=True)
+ 	description = models.TextField(blank=True)
+
+
+
 class Holiday(models.Model):
     doctor                 = models.ForeignKey(Account,on_delete=models.CASCADE,)
     date                   = models.DateField()
@@ -111,9 +121,9 @@ class Holiday(models.Model):
     
 
 class Reservation(TimeStampable):
-    user                   = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="user")
-    doctor                 = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="doctor")
-    clinic                 = models.ForeignKey(Clinic,on_delete=models.CASCADE,related_name="clinic")
+    user                   = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="userReservation")
+    doctor                 = models.ForeignKey(Account,on_delete=models.CASCADE,related_name="doctorReservation")
+    clinic                 = models.ForeignKey(Clinic,on_delete=models.CASCADE,related_name="clinicReservation")
     date                   = models.DateField()
     time_slot              = models.TimeField()
     

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Account,Image,Reservation,Clinic,Holiday,TimeSlot
+from .models import Account,Image,Reservation,Clinic,Holiday,TimeSlot, AccountInfoField
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 
@@ -10,10 +10,12 @@ class InLineImage(admin.StackedInline):
 class InLineTimeSlot(admin.StackedInline,DynamicArrayMixin):
     model=TimeSlot
 
+class InlineInfoField(admin.StackedInline):
+    model = AccountInfoField
 
 
 class AccountAdmin(admin.ModelAdmin):
-    inlines=[InLineImage,InLineTimeSlot]
+    inlines=[InLineImage,InLineTimeSlot,InlineInfoField]
     list_display=("username",'email',"first_name","last_name","last_login","phone")
     list_filter=('is_admin',"is_doctor","date_joined","last_login")
     search_fields = ("username",'email',"first_name","last_name","last_login","phone")

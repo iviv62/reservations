@@ -1,21 +1,39 @@
 import graphene
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError
-from .models import Account,Image,Clinic
+from .models import Account,Image,Clinic,AccountInfoField,Holiday,Reservation
 from backend.settings import MEDIA_URL
+from graphene import Node
+from graphene_django.filter import DjangoFilterConnectionField
 
 class AccountType(DjangoObjectType):
     class Meta:
         model = Account
-        fields = "__all__"
+        interfaces = (Node,)
+        filter_fields = {
+            'specialty': ['exact', 'icontains', 'istartswith'],
+            'city': ['icontains'],
+        }
         convert_choices_to_enum = False
+        
+    
         
 class ClinicType(DjangoObjectType):
     class Meta:
         model = Clinic
         convert_choices_to_enum = False
-       
-       
+        
+class InfoFieldType(DjangoObjectType):
+    class Meta:
+        model = AccountInfoField
+        
+class HolidayType(DjangoObjectType):
+    class Meta:
+        model = Holiday
+        
+class ReservationType(DjangoObjectType):
+    class Meta:
+        model = Reservation
 
 class ImageType(DjangoObjectType):
 
@@ -29,7 +47,9 @@ class ImageType(DjangoObjectType):
     
 class Query(graphene.ObjectType):
     all_users=graphene.List(AccountType)
-    user=graphene.Field(AccountType, id=graphene.Int())
+    #user=graphene.Field(AccountType, id=graphene.Int())
+    all_users=DjangoFilterConnectionField(AccountType)
+    user = Node.Field(AccountType)
     
 
     def resolve_all_users(self,info,**kwargs):
