@@ -1,32 +1,44 @@
 {
-  allUsers{
-    id
-    isAdmin
-    isStaff
-    isSuperuser
-    isDoctor
-    firstName
-    lastName
-    email
-    phone
-    region
-    insurers
-    badges
-    specialty
-    city
-    address
-    website
-    description
-    worksIn{
-      id
-      name
-      region
-      city
-      address
-    }
-    images{
-      id
-      image
+  allUsers {
+    edges {
+      node {
+        id
+        isAdmin
+        isStaff
+        isSuperuser
+        isDoctor
+        firstName
+        lastName
+        email
+        phone
+        region
+        insurers
+        badges
+        specialty
+        city
+        address
+        website
+        accountinfofieldSet {
+          id
+          title
+          description
+        }
+        holidaySet {
+          id
+          date
+        }
+        worksIn {
+          id
+          name
+          region
+          city
+          address
+        }
+        images {
+          id
+          image
+        }
+      }
     }
   }
 }

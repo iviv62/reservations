@@ -11,12 +11,12 @@ const Header = () => {
                     <div className="header-title">
                         Намерете най-добрите специалисти и изберете удобно за вас време за преглед  
                     </div>
-                    
+                    <SearchForm/>
 
                 </div>
                 <div className="column"></div>
             </div>
-            <SearchForm/>
+            
         </div>
     )
 }

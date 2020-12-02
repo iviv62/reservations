@@ -5,7 +5,8 @@ const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
     { value: 'vanilla', label: 'Vanilla' }
-  ]
+
+]
 
 const SearchForm = () => {
 
@@ -17,21 +18,22 @@ const SearchForm = () => {
     return (
         <div class="search-form">
                     <form>
-                        <div className="form-group">
-                            <div className="row align-items-center">
+                        <div className="">
+                           
                                 <div className="column">
                                 <Select
-                                className="basic-single"
+                                className="mt-3"
                                 classNamePrefix="Специалист"
                                 isClearable={clearable}
                                 placeholder={'Специалист'}
                                 name="specialist"
                                 options={options}/>
                                 </div>
+                        
                                 <div className="column">
 
                                 <Select
-                                className="basic-single"
+                                className="mt-3"
                                 classNamePrefix="Специалист"
                                 isClearable={clearable}
                                 placeholder={'Град'}
@@ -40,10 +42,10 @@ const SearchForm = () => {
                                 </div>
 
                                 <div className="column">
-                                    <button>Търси</button>
+                                    <button className="mt-3">Търси</button>
                                 </div>
                             </div>
-                        </div>
+                        
                     </form>
                 </div>
     )
